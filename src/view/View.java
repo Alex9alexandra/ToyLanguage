@@ -13,7 +13,7 @@ public class View {
 
     public void printMenu() {
         System.out.println("1.Select the program : ");
-        System.out.println("    1.int v; v=2;Print(v)");
+        System.out.println("    1.int v; v=3;Print(v)");
         System.out.println("    2.int a;int b; a=2+3*5;b=a+1;Print(b)");
         System.out.println("    3.bool a; int v; a=true;(If a Then v=2 Else v=3);Print(v)");
         System.out.println("    4. ERROR FOR bool b; int v; a=true;(If a Then v=2 Else v=3);Print(v)");

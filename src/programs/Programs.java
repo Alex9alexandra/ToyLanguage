@@ -17,7 +17,7 @@ public class Programs {
                     new VariableDeclarationStatement(new IntType(), "v"),
                     new CompoundStatement(
                             new AssignmentStatement(
-                                    new ValueExpression(new IntegerValue(2)), "v"),
+                                    new ValueExpression(new IntegerValue(3)), "v"),
                             new PrintStatement(
                                     new VariableExpression("v")))),
             new CompoundStatement(
