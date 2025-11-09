@@ -8,4 +8,6 @@ public interface Type {
     String toString();
 
     Value getDefaultValue();
+
+    Type deepCopy();
 }

@@ -28,4 +28,9 @@ public record AssignmentStatement(Expression expression, String variableName)
     public String toString() {
         return variableName + " = " + expression.toString();
     }
+
+    @Override
+    public Statement deepCopy() {
+        return new AssignmentStatement(expression.deepCopy(), variableName);
+    }
 }

@@ -19,4 +19,9 @@ public class BoolType implements Type {
         return new model.value.BooleanValue(false);
     }
 
+    @Override
+    public Type deepCopy() {
+        return new BoolType();
+    }
+
 }

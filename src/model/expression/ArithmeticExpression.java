@@ -51,7 +51,12 @@ public class ArithmeticExpression implements Expression {
 
     @Override
     public String toString() {
-        return e1.toString() + " " + operator + " " + e2.toString();
+        return "("+e1.toString() + " " + operator + " " + e2.toString()+")";
+    }
+
+    @Override
+    public Expression deepCopy() {
+        return new ArithmeticExpression(e1.deepCopy(), e2.deepCopy(), operator);
     }
 }
 

@@ -8,4 +8,8 @@ public interface Value {
     Value getValue();
 
     String toString();
+
+    boolean equals(Object another);
+
+    Value deepCopy();
 }

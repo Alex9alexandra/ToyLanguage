@@ -11,4 +11,5 @@ public interface Statement {
     ProgramState execute(ProgramState state) throws VariableAlreadyDeclaredException,IfStatementNotEvalToBoolException,VariableNotDefinedException, AsignmentTypeMismatchException;
 
     String toString();
+    Statement deepCopy();
 }

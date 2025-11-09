@@ -17,6 +17,10 @@ public class ListOut<T> implements Out<T> {
 
     @Override
     public String toString() {
-        return outputList.toString();
+        StringBuilder sb = new StringBuilder("Output:\n");
+        for (T value : outputList) {
+            sb.append(value.toString()).append("\n");
+        }
+        return sb.toString();
     }
 }

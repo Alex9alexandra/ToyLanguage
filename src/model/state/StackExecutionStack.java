@@ -1,6 +1,7 @@
 package model.state;
 
 import exceptions.StackReadingFromEmptyStackException;
+import model.statement.Statement;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +23,14 @@ public class StackExecutionStack<T> implements ExecutionStack<T> {
 
     @Override
     public String toString() {
-        return stack.toString();
+
+        StringBuilder answer = new StringBuilder("Execution Stack:\n");
+        LinkedList<T> copy = new LinkedList<>(stack);
+        while (!copy.isEmpty()) {
+            T stmt = copy.removeFirst();
+            answer.append(stmt.toString()).append("\n");
+        }
+        return answer.toString();
     }
 
     @Override

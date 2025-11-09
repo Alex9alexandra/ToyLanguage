@@ -12,4 +12,9 @@ public class NoOperationStatement implements Statement {
     public String toString() {
         return "nop";
     }
+
+    @Override
+    public Statement deepCopy() {
+        return new NoOperationStatement();
+    }
 }

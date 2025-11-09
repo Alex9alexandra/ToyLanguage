@@ -24,4 +24,9 @@ public class VariableExpression implements Expression {
     public String toString() {
         return variableName;
     }
+
+    @Override
+    public Expression deepCopy() {
+        return new VariableExpression(variableName);
+    }
 }

@@ -15,4 +15,9 @@ public record PrintStatement(Expression expression) implements Statement {
     public String toString() {
         return "print(" + expression.toString() + ")";
     }
+
+    @Override
+    public Statement deepCopy() {
+        return new PrintStatement(expression.deepCopy());
+    }
 }

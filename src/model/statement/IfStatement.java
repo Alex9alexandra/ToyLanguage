@@ -27,5 +27,10 @@ public record IfStatement(Expression condition, Statement thenBranch, Statement 
     public String toString() {
         return "if (" + condition.toString() + ") then (" + thenBranch.toString() + ") else (" + elseBranch.toString() + ")";
     }
+
+    @Override
+    public Statement deepCopy() {
+        return new IfStatement(condition.deepCopy(), thenBranch.deepCopy(), elseBranch.deepCopy());
+    }
 }
 

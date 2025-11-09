@@ -25,13 +25,15 @@ public class Controller implements IController {
     }
 
     @Override
-    public void allStepExecution() {
+    public void allStepExecution() throws Exception {
         ProgramState program = repo.getCurrentProgramState();
         displayCurrentProgramState();
+        repo.logProgramStateExecution();
         while (!program.executionStack().isEmpty()) {
             try {
                 oneStepExecution(program);
                 displayCurrentProgramState();
+                repo.logProgramStateExecution();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 break;

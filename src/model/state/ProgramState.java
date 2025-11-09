@@ -8,13 +8,15 @@ public class ProgramState {
     SymbolTable<String, Value> symbolTable;
     Out<Value> out;
     Statement originalProgram;
+    FileTable fileTable;
 
-    public ProgramState(ExecutionStack<Statement> executionStack, SymbolTable<String, Value> symbolTable, Out<Value> out, Statement program) {
+    public ProgramState(ExecutionStack<Statement> executionStack, SymbolTable<String, Value> symbolTable, Out<Value> out,FileTable fileTable, Statement program) {
         this.executionStack = executionStack;
         this.symbolTable = symbolTable;
         this.out = out;
         this.originalProgram = deepCopy(program);
         this.executionStack.push(program);
+        this.fileTable = fileTable;
     }
 
     @Override
@@ -25,7 +27,7 @@ public class ProgramState {
     }
 
     private Statement deepCopy(Statement program) {
-        return program;
+        return program.deepCopy();
     }
 
     public void setExecutionStack(ExecutionStack<Statement> executionStack) {
@@ -60,5 +62,12 @@ public class ProgramState {
         return originalProgram;
     }
 
+    public FileTable fileTable() {
+        return fileTable;
+    }
+
+    public void setFileTable(FileTable fileTable) {
+        this.fileTable = fileTable;
+    }
 }
 

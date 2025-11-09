@@ -50,7 +50,12 @@ public class LogicExpression implements Expression {
             case 2 -> op = "or";
             default -> op = "unknown";
         }
-        return e1.toString() + " " + op + " " + e2.toString();
+        return "("+ e1.toString() + " " + op + " " + e2.toString()+")";
+    }
+
+    @Override
+    public Expression deepCopy() {
+        return new LogicExpression(e1.deepCopy(), e2.deepCopy(), operator);
     }
 
 }

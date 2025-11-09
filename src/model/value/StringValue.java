@@ -1,12 +1,14 @@
 package model.value;
 
-import model.type.BoolType;
+import model.type.IntType;
+import model.type.StrType;
 import model.type.Type;
 
-public record BooleanValue(boolean value) implements Value {
+public record StringValue(String value) implements Value {
+
     @Override
     public Type getType() {
-        return new BoolType();
+        return new StrType();
     }
 
     @Override
@@ -16,19 +18,19 @@ public record BooleanValue(boolean value) implements Value {
 
     @Override
     public String toString() {
-        return Boolean.toString(value);
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) return true;
         if (other == null || getClass() != other.getClass()) return false;
-        BooleanValue that = (BooleanValue) other;
-        return this.value == that.value;
+        StringValue that = (StringValue) other;
+        return value.equals(that.value);
     }
 
     @Override
     public Value deepCopy() {
-        return new BooleanValue(value);
+        return new StringValue(value);
     }
 }

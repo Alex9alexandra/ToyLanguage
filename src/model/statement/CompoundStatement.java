@@ -17,4 +17,9 @@ public record CompoundStatement(Statement first, Statement second) implements St
     public String toString() {
         return "(" + first.toString() + "; " + second.toString() + ")";
     }
+
+    @Override
+    public Statement deepCopy() {
+        return new CompoundStatement(first.deepCopy(), second.deepCopy());
+    }
 }

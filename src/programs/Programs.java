@@ -1,13 +1,17 @@
 package programs;
 
 import model.expression.ArithmeticExpression;
+import model.expression.RelationalExpression;
 import model.expression.ValueExpression;
 import model.expression.VariableExpression;
 import model.statement.*;
 import model.type.BoolType;
 import model.type.IntType;
+import model.type.StrType;
+import model.type.Type;
 import model.value.BooleanValue;
 import model.value.IntegerValue;
+import model.value.StringValue;
 
 import java.util.List;
 
@@ -87,7 +91,56 @@ public class Programs {
                                                             new VariableExpression("a"), new ValueExpression(new IntegerValue(1)), '+'), "b"),
                                             new PrintStatement(new VariableExpression("b"))))
 
-                    ))
+                    )),
+
+            new CompoundStatement(
+                    new VariableDeclarationStatement(new StrType(), "varf"),
+                    new CompoundStatement(
+                            new AssignmentStatement(new ValueExpression(new StringValue("test.in")),"varf"),
+                            new CompoundStatement(
+                                    new OpenRFileStatement(new VariableExpression("varf")),
+                                    new CompoundStatement(
+                                            new VariableDeclarationStatement(new IntType(), "varc"),
+                                            new CompoundStatement(
+                                                    new ReadFileStatement(new VariableExpression("varf"), "varc"),
+                                                    new CompoundStatement(
+                                                            new PrintStatement(new VariableExpression("varc")),
+                                                            new CompoundStatement(
+                                                                    new ReadFileStatement(new VariableExpression("varf"), "varc"),
+                                                                    new CompoundStatement(
+                                                                            new PrintStatement(new VariableExpression("varc")),
+                                                                            new CloseRFileStatement(new VariableExpression("varf"))
+                                                                    )
+                                                            )
+                                                    )
+                                            )
+                                    )
+                            )
+                    )
+            ),
+            new CompoundStatement(
+                    new VariableDeclarationStatement( new IntType(),"a"),
+                    new CompoundStatement(
+                            new VariableDeclarationStatement( new IntType(),"b"),
+                            new CompoundStatement(
+                                    new AssignmentStatement( new ValueExpression(new IntegerValue(5)),"a"),
+                                    new CompoundStatement(
+                                            new AssignmentStatement( new ValueExpression(new IntegerValue(7)),"b"),
+                                            new IfStatement(
+                                                    new RelationalExpression(
+                                                            new VariableExpression("a"),
+                                                            new VariableExpression("b"),
+                                                            "<"
+                                                    ),
+                                                    new PrintStatement(new VariableExpression("a")),
+                                                    new PrintStatement(new VariableExpression("b"))
+                                            )
+                                    )
+                            )
+                    )
+            )
+
+
 
 
     );

@@ -6,7 +6,7 @@ import model.state.ProgramState;
 public interface IController {
     ProgramState oneStepExecution(ProgramState state) ;
 
-    void allStepExecution() throws ControllerExecutionStackIsEmptyException ;
+    void allStepExecution() throws Exception;
 
     void displayCurrentProgramState();
 

@@ -19,4 +19,9 @@ public class ValueExpression implements Expression {
     public String toString() {
         return e.toString();
     }
+
+    @Override
+    public Expression deepCopy() {
+        return new ValueExpression(e.deepCopy());
+    }
 }

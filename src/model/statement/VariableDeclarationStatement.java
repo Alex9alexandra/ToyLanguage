@@ -21,4 +21,9 @@ public record VariableDeclarationStatement(Type type, String variableName) imple
     public String toString() {
         return type.toString() + " " + variableName;
     }
+
+    @Override
+    public Statement deepCopy() {
+        return new VariableDeclarationStatement(type.deepCopy(), variableName);
+    }
 }

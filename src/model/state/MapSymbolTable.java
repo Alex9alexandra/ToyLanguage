@@ -38,9 +38,12 @@ public class MapSymbolTable<S, V> implements SymbolTable<S, V> {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder();
+        StringBuilder result = new StringBuilder("SymTable:\n");
         for (S key : map.keySet()) {
-            result.append(key.toString()).append(" -> ").append(map.get(key).toString()).append("\n");
+            result.append(key.toString())
+                    .append(" -> ")
+                    .append(map.get(key).toString())
+                    .append("\n");
         }
         return result.toString();
     }
