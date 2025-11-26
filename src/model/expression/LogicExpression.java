@@ -19,7 +19,7 @@ public class LogicExpression implements Expression {
     }
 
     @Override
-    public Value evaluate(SymbolTable<String, Value> symTable, Heap heap) throws  LogicSecOpNotBoolException,LogicFirstOpNotBoolException {
+    public Value evaluate(SymbolTable<String, Value> symTable, Heap<Value> heap) throws  LogicSecOpNotBoolException,LogicFirstOpNotBoolException {
         Value v1;
         Value v2;
         v1 = e1.evaluate(symTable);

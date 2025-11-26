@@ -1,0 +1,323 @@
+Execution Stack:
+(string varf; (varf = test.in; (openRFile(varf); (int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf)))))))))
+
+SymTable:
+
+Output:
+
+FileTable:
+
+Execution Stack:
+string varf
+(varf = test.in; (openRFile(varf); (int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf))))))))
+
+SymTable:
+
+Output:
+
+FileTable:
+
+Execution Stack:
+(varf = test.in; (openRFile(varf); (int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf))))))))
+
+SymTable:
+varf -> 
+
+Output:
+
+FileTable:
+
+Execution Stack:
+varf = test.in
+(openRFile(varf); (int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf)))))))
+
+SymTable:
+varf -> 
+
+Output:
+
+FileTable:
+
+Execution Stack:
+(openRFile(varf); (int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf)))))))
+
+SymTable:
+varf -> test.in
+
+Output:
+
+FileTable:
+
+Execution Stack:
+openRFile(varf)
+(int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf))))))
+
+SymTable:
+varf -> test.in
+
+Output:
+
+FileTable:
+
+Execution Stack:
+(int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf))))))
+
+SymTable:
+varf -> test.in
+
+Output:
+
+FileTable:
+test.in
+
+Execution Stack:
+int varc
+(readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf)))))
+
+SymTable:
+varf -> test.in
+
+Output:
+
+FileTable:
+test.in
+
+Execution Stack:
+(readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf)))))
+
+SymTable:
+varf -> test.in
+varc -> 0
+
+Output:
+
+FileTable:
+test.in
+
+Execution Stack:
+readFile(varf, varc)
+(print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf))))
+
+SymTable:
+varf -> test.in
+varc -> 0
+
+Output:
+
+FileTable:
+test.in
+
+Execution Stack:
+(print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf))))
+
+SymTable:
+varf -> test.in
+varc -> 15
+
+Output:
+
+FileTable:
+test.in
+
+Execution Stack:
+print(varc)
+(readFile(varf, varc); (print(varc); closeRFile(varf)))
+
+SymTable:
+varf -> test.in
+varc -> 15
+
+Output:
+
+FileTable:
+test.in
+
+Execution Stack:
+(readFile(varf, varc); (print(varc); closeRFile(varf)))
+
+SymTable:
+varf -> test.in
+varc -> 15
+
+Output:
+15
+
+FileTable:
+test.in
+
+Execution Stack:
+readFile(varf, varc)
+(print(varc); closeRFile(varf))
+
+SymTable:
+varf -> test.in
+varc -> 15
+
+Output:
+15
+
+FileTable:
+test.in
+
+Execution Stack:
+(print(varc); closeRFile(varf))
+
+SymTable:
+varf -> test.in
+varc -> 50
+
+Output:
+15
+
+FileTable:
+test.in
+
+Execution Stack:
+print(varc)
+closeRFile(varf)
+
+SymTable:
+varf -> test.in
+varc -> 50
+
+Output:
+15
+
+FileTable:
+test.in
+
+Execution Stack:
+closeRFile(varf)
+
+SymTable:
+varf -> test.in
+varc -> 50
+
+Output:
+15
+50
+
+FileTable:
+test.in
+
+Execution Stack:
+
+SymTable:
+varf -> test.in
+varc -> 50
+
+Output:
+15
+50
+
+FileTable:
+
+Execution Stack:
+(string varf; (varf = test.in; (openRFile(varf); (int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf)))))))))
+
+SymTable:
+
+Output:
+
+FileTable:
+
+Execution Stack:
+string varf
+(varf = test.in; (openRFile(varf); (int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf))))))))
+
+SymTable:
+
+Output:
+
+FileTable:
+
+Execution Stack:
+(varf = test.in; (openRFile(varf); (int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf))))))))
+
+SymTable:
+varf -> 
+
+Output:
+
+FileTable:
+
+Execution Stack:
+varf = test.in
+(openRFile(varf); (int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf)))))))
+
+SymTable:
+varf -> 
+
+Output:
+
+FileTable:
+
+Execution Stack:
+(openRFile(varf); (int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf)))))))
+
+SymTable:
+varf -> test.in
+
+Output:
+
+FileTable:
+
+Execution Stack:
+openRFile(varf)
+(int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf))))))
+
+SymTable:
+varf -> test.in
+
+Output:
+
+FileTable:
+
+Execution Stack:
+(int varc; (readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf))))))
+
+SymTable:
+varf -> test.in
+
+Output:
+
+FileTable:
+test.in
+
+Execution Stack:
+int varc
+(readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf)))))
+
+SymTable:
+varf -> test.in
+
+Output:
+
+FileTable:
+test.in
+
+Execution Stack:
+(readFile(varf, varc); (print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf)))))
+
+SymTable:
+varf -> test.in
+varc -> 0
+
+Output:
+
+FileTable:
+test.in
+
+Execution Stack:
+readFile(varf, varc)
+(print(varc); (readFile(varf, varc); (print(varc); closeRFile(varf))))
+
+SymTable:
+varf -> test.in
+varc -> 0
+
+Output:
+
+FileTable:
+test.in
+

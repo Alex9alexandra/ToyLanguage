@@ -8,11 +8,11 @@ public class ProgramState {
     ExecutionStack<Statement> executionStack;
     SymbolTable<String, Value> symbolTable;
     Out<Value> out;
-    Heap heap;
+    Heap<Value> heap;
     Statement originalProgram;
     FileTable fileTable;
 
-    public ProgramState(ExecutionStack<Statement> executionStack, SymbolTable<String, Value> symbolTable, Out<Value> out,FileTable fileTable,Heap heap, Statement program) {
+    public ProgramState(ExecutionStack<Statement> executionStack, SymbolTable<String, Value> symbolTable, Out<Value> out,FileTable fileTable,Heap<Value> heap, Statement program) {
         this.executionStack = executionStack;
         this.symbolTable = symbolTable;
         this.out = out;
@@ -79,7 +79,16 @@ public class ProgramState {
         this.heap = heap;
     }
 
-
+//    public boolean isNotCompleted(){
+//        return !executionStack.isEmpty();
+//    }
+//
+//    public ProgramState oneStep() throws ProgStateExecStackIsEmpty {
+//        if(executionStack.isEmpty())
+//            throw new ProgStateExecStackIsEmpty("Program state stack is empty");
+//        Statement currentStatement=executionStack.pop();
+//        return currentStatement.execute(this);
+//    }
 
 }
 

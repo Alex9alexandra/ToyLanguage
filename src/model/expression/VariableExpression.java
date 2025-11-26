@@ -14,7 +14,7 @@ public class VariableExpression implements Expression {
     }
 
     @Override
-    public Value evaluate(SymbolTable<String, Value> symTable, Heap heap) throws VariableNotDefinedException {
+    public Value evaluate(SymbolTable<String, Value> symTable, Heap<Value> heap) throws VariableNotDefinedException {
         if (!symTable.isDefined(variableName)) {
             throw new VariableNotDefinedException("Variable not defined");
         }

@@ -7,8 +7,8 @@ import model.value.Value;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HeapTable implements Heap{
-    private Map<Integer,Value> heap;
+public class HeapTable<V extends Value> implements Heap<V>{
+    private Map<Integer,V> heap;
     private int nextFreeAddress;
 
     public HeapTable()
@@ -18,7 +18,7 @@ public class HeapTable implements Heap{
     }
 
     @Override
-    public int allocate(Value value) {
+    public int allocate(V value) {
         int adder=nextFreeAddress;
         heap.put(adder,value);
         nextFreeAddress++;
@@ -26,14 +26,14 @@ public class HeapTable implements Heap{
     }
 
     @Override
-    public Value read(int address) throws ReadFromHeapExceptions {
+    public V read(int address) throws ReadFromHeapExceptions {
         if(!heap.containsKey(address))
             throw new ReadFromHeapExceptions("The address "+address+" is not allocated in the heap.");
         return heap.get(address);
     }
 
     @Override
-    public void write(int address, Value value) throws WriteToHeapExceptions {
+    public void write(int address, V value) throws WriteToHeapExceptions {
         if(!heap.containsKey(address))
             throw new WriteToHeapExceptions("The address "+address+" is not allocated in the heap.");
         heap.put(address,value);
@@ -47,9 +47,9 @@ public class HeapTable implements Heap{
     @Override
     public Heap deepCopy() {
         HeapTable copy=new HeapTable();
-        for(Map.Entry<Integer,Value> entry:heap.entrySet())
+        for(Map.Entry<Integer,V> entry:heap.entrySet())
         {
-            copy.heap.put(entry.getKey(),entry.getValue().deepCopy());
+            copy.heap.put(entry.getKey(), (V) entry.getValue().deepCopy());
         }
         copy.nextFreeAddress=this.nextFreeAddress;
         return copy;
@@ -57,10 +57,6 @@ public class HeapTable implements Heap{
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Integer,Value> entry : heap.entrySet()) {
-            sb.append(entry.getKey()).append(" -> ").append(entry.getValue().toString()).append("\n");
-        }
-        return sb.toString();
+        return heap.toString();
     }
 }

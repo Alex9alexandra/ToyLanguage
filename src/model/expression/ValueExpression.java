@@ -12,7 +12,7 @@ public class ValueExpression implements Expression {
     }
 
     @Override
-    public Value evaluate(SymbolTable<String, Value> symTable, Heap heap) {
+    public Value evaluate(SymbolTable<String, Value> symTable, Heap<Value> heap) {
         return e;
     }
 

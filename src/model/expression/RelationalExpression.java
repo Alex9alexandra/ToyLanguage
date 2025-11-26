@@ -18,7 +18,7 @@ public class RelationalExpression implements Expression {
         this.operator = operator;
     }
     @Override
-    public Value evaluate(SymbolTable<String, Value> symTable, Heap heap) throws ArithmeticDivBy0Exception, ArithmeticInvalidOpException, ArithmeticSecOpNotIntException, ArithmeticFirstOpNotIntException, LogicSecOpNotBoolException, LogicFirstOpNotBoolException, VariableNotDefinedException {
+    public Value evaluate(SymbolTable<String, Value> symTable, Heap<Value> heap) throws ArithmeticDivBy0Exception, ArithmeticInvalidOpException, ArithmeticSecOpNotIntException, ArithmeticFirstOpNotIntException, LogicSecOpNotBoolException, LogicFirstOpNotBoolException, VariableNotDefinedException {
         Value v1;
         Value v2;
         v1 = exp1.evaluate(symTable);
