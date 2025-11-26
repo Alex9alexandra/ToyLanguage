@@ -4,6 +4,7 @@ import exceptions.ArithmeticDivBy0Exception;
 import exceptions.ArithmeticFirstOpNotIntException;
 import exceptions.ArithmeticInvalidOpException;
 import exceptions.ArithmeticSecOpNotIntException;
+import model.state.Heap;
 import model.state.SymbolTable;
 import model.type.IntType;
 import model.value.IntegerValue;
@@ -21,7 +22,7 @@ public class ArithmeticExpression implements Expression {
     }
 
     @Override
-    public Value evaluate(SymbolTable<String, Value> symTable) throws ArithmeticDivBy0Exception,ArithmeticInvalidOpException,ArithmeticSecOpNotIntException,ArithmeticFirstOpNotIntException {
+    public Value evaluate(SymbolTable<String, Value> symTable, Heap heap) throws ArithmeticDivBy0Exception,ArithmeticInvalidOpException,ArithmeticSecOpNotIntException,ArithmeticFirstOpNotIntException {
         Value v1;
         Value v2;
         v1 = e1.evaluate(symTable);

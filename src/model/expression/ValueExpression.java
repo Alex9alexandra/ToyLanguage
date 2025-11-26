@@ -1,5 +1,6 @@
 package model.expression;
 
+import model.state.Heap;
 import model.state.SymbolTable;
 import model.value.Value;
 
@@ -11,7 +12,7 @@ public class ValueExpression implements Expression {
     }
 
     @Override
-    public Value evaluate(SymbolTable<String, Value> symTable) {
+    public Value evaluate(SymbolTable<String, Value> symTable, Heap heap) {
         return e;
     }
 

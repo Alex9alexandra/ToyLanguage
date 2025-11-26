@@ -16,13 +16,12 @@ import java.util.List;
 
                 List<Statement> programList = Programs.hardcodedPrograms;
 
-
                 ProgramState prg1 = new ProgramState(
                         new StackExecutionStack<>(),
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
-                        programList.get(0).deepCopy()
+                        programList.get(0)
                 );
                 IRepository repo1 = new Repository(prg1, "log1.txt");
                 Controller ctr1 = new Controller(repo1);
@@ -32,7 +31,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
-                        programList.get(1).deepCopy()
+                        programList.get(1)
                 );
                 IRepository repo2 = new Repository(prg2, "log2.txt");
                 Controller ctr2 = new Controller(repo2);
@@ -42,7 +41,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
-                        programList.get(2).deepCopy()
+                        programList.get(2)
                 );
                 IRepository repo3 = new Repository(prg3, "log3.txt");
                 Controller ctr3 = new Controller(repo3);
@@ -52,7 +51,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
-                        programList.get(3).deepCopy()
+                        programList.get(3)
                 );
                 IRepository repo4 = new Repository(prg4, "log4.txt");
                 Controller ctr4 = new Controller(repo4);
@@ -62,7 +61,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
-                        programList.get(4).deepCopy()
+                        programList.get(4)
                 );
                 IRepository repo5 = new Repository(prg5, "log5.txt");
                 Controller ctr5 = new Controller(repo5);
@@ -72,7 +71,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
-                        programList.get(5).deepCopy()
+                        programList.get(5)
                 );
                 IRepository repo6 = new Repository(prg6, "log6.txt");
                 Controller ctr6 = new Controller(repo6);
@@ -82,7 +81,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
-                        programList.get(6).deepCopy()
+                        programList.get(6)
                 );
                 IRepository repo7 = new Repository(prg7, "log7.txt");
                 Controller ctr7 = new Controller(repo7);
@@ -92,7 +91,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
-                        programList.get(7).deepCopy()
+                        programList.get(7)
                 );
                 IRepository repo8 = new Repository(prg8, "log8.txt");
                 Controller ctr8 = new Controller(repo8);

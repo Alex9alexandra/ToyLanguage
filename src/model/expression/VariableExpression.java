@@ -1,6 +1,7 @@
 package model.expression;
 
 import exceptions.VariableNotDefinedException;
+import model.state.Heap;
 import model.state.SymbolTable;
 import model.value.Value;
 
@@ -13,7 +14,7 @@ public class VariableExpression implements Expression {
     }
 
     @Override
-    public Value evaluate(SymbolTable<String, Value> symTable) throws VariableNotDefinedException {
+    public Value evaluate(SymbolTable<String, Value> symTable, Heap heap) throws VariableNotDefinedException {
         if (!symTable.isDefined(variableName)) {
             throw new VariableNotDefinedException("Variable not defined");
         }

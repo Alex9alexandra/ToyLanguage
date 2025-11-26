@@ -1,5 +1,6 @@
 package model.state;
 
+import exceptions.ProgStateExecStackIsEmpty;
 import model.statement.Statement;
 import model.value.Value;
 
@@ -7,23 +8,23 @@ public class ProgramState {
     ExecutionStack<Statement> executionStack;
     SymbolTable<String, Value> symbolTable;
     Out<Value> out;
+    Heap heap;
     Statement originalProgram;
     FileTable fileTable;
 
-    public ProgramState(ExecutionStack<Statement> executionStack, SymbolTable<String, Value> symbolTable, Out<Value> out,FileTable fileTable, Statement program) {
+    public ProgramState(ExecutionStack<Statement> executionStack, SymbolTable<String, Value> symbolTable, Out<Value> out,FileTable fileTable,Heap heap, Statement program) {
         this.executionStack = executionStack;
         this.symbolTable = symbolTable;
         this.out = out;
-        this.originalProgram = deepCopy(program);
+        this.originalProgram = program.deepCopy();
         this.executionStack.push(program);
+        this.heap=heap;
         this.fileTable = fileTable;
     }
 
     @Override
     public String toString() {
-        return "Execution Stack: " + executionStack.toString() + "\n" +
-                "Symbol Table: " + symbolTable.toString() + "\n" +
-                "Output: " + out.toString() + "\n";
+        return  executionStack.toString() + "\n"  + symbolTable.toString() +"\n"+ heap.toString() + "\n"  + fileTable.toString()+ "\n"+ out.toString() + "\n";
     }
 
     private Statement deepCopy(Statement program) {
@@ -69,5 +70,16 @@ public class ProgramState {
     public void setFileTable(FileTable fileTable) {
         this.fileTable = fileTable;
     }
+
+    public Heap heap() {
+        return heap;
+    }
+
+    public void setHeap(Heap heap) {
+        this.heap = heap;
+    }
+
+
+
 }
 

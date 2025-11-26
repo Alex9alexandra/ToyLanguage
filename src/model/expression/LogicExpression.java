@@ -1,6 +1,7 @@
 package model.expression;
 
 import exceptions.*;
+import model.state.Heap;
 import model.state.SymbolTable;
 import model.type.BoolType;
 import model.value.BooleanValue;
@@ -18,7 +19,7 @@ public class LogicExpression implements Expression {
     }
 
     @Override
-    public Value evaluate(SymbolTable<String, Value> symTable) throws  LogicSecOpNotBoolException,LogicFirstOpNotBoolException {
+    public Value evaluate(SymbolTable<String, Value> symTable, Heap heap) throws  LogicSecOpNotBoolException,LogicFirstOpNotBoolException {
         Value v1;
         Value v2;
         v1 = e1.evaluate(symTable);
