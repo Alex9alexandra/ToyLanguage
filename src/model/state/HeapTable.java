@@ -57,6 +57,23 @@ public class HeapTable<V extends Value> implements Heap<V>{
 
     @Override
     public String toString() {
-        return heap.toString();
+        StringBuilder result = new StringBuilder("HeapTable:\n");
+        for (Integer key : heap.keySet()) {
+            result.append(key.toString())
+                    .append(" -> ")
+                    .append(heap.get(key).toString())
+                    .append("\n");
+        }
+        return result.toString();
+    }
+
+    @Override
+    public Map<Integer,V> getContent(){
+        return heap;
+    }
+
+    @Override
+    public void setContent(Map<Integer, V> newContent) {
+        this.heap=newContent;
     }
 }

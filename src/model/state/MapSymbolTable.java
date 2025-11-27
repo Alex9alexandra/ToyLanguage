@@ -47,4 +47,9 @@ public class MapSymbolTable<S, V> implements SymbolTable<S, V> {
         }
         return result.toString();
     }
+
+    @Override
+    public Map<S, V> getContent() {
+        return map;
+    }
 }

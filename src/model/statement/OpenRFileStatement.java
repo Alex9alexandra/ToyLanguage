@@ -12,7 +12,7 @@ import java.io.FileReader;
 public record OpenRFileStatement(Expression expression) implements Statement{
     @Override
     public ProgramState execute(ProgramState state) throws VariableAlreadyDeclaredException, IfStatementNotEvalToBoolException, VariableNotDefinedException, AsignmentTypeMismatchException {
-        var value = expression.evaluate(state.symbolTable());
+        var value = expression.evaluate(state.symbolTable(), state.heap());
         if(!(value instanceof StringValue stringValue)){
             throw new InvalidTypeException("Type must be String");
         }

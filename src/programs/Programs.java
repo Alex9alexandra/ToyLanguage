@@ -1,14 +1,8 @@
 package programs;
 
-import model.expression.ArithmeticExpression;
-import model.expression.RelationalExpression;
-import model.expression.ValueExpression;
-import model.expression.VariableExpression;
+import model.expression.*;
 import model.statement.*;
-import model.type.BoolType;
-import model.type.IntType;
-import model.type.StrType;
-import model.type.Type;
+import model.type.*;
 import model.value.BooleanValue;
 import model.value.IntegerValue;
 import model.value.StringValue;
@@ -138,10 +132,74 @@ public class Programs {
                                     )
                             )
                     )
+            ),
+            //Ref int v;new(v,20);Ref Ref int a; new(a,v); new(v,30);print(rH(rH(a)))
+
+            new CompoundStatement(
+                    new VariableDeclarationStatement(new RefType(new IntType()),"v"),
+                    new CompoundStatement(
+                            new NewStatement("v",new ValueExpression(new IntegerValue(20))),
+                            new CompoundStatement(
+                                    new VariableDeclarationStatement(new RefType(new RefType(new IntType())),"a"),
+                                    new CompoundStatement(
+                                            new NewStatement("a",new VariableExpression("v")),
+                                            new CompoundStatement(
+                                                    new NewStatement("v",new ValueExpression(new IntegerValue(30))),
+                                                    new PrintStatement(
+                                                            new ReadHeapExpression(new ReadHeapExpression((new VariableExpression("a"))))
+                                                            )))))
+
+
+
+            ),
+            //int v; v=4; (while (v>0) print(v);v=v-1);print(v)
+            new CompoundStatement(
+                    new VariableDeclarationStatement( new IntType(),"v"),
+                    new CompoundStatement(
+                            new AssignmentStatement(new ValueExpression(new IntegerValue(4)), "v"),
+                            new CompoundStatement(
+                                    new WhileStatement(
+                                            new RelationalExpression(
+                                                    new VariableExpression("v"),
+                                                    new ValueExpression(new IntegerValue(0)),
+                                                    ">"
+                                            ),
+                                            new CompoundStatement(
+                                                    new PrintStatement(new VariableExpression("v")),
+                                                    new AssignmentStatement(
+                                                            new ArithmeticExpression(
+                                                                    new VariableExpression("v"),
+                                                                    new ValueExpression(new IntegerValue(1)),
+                                                                    '-'
+                                                            ),"v"
+                                                    )
+                                            )
+                                    ),
+                                    new PrintStatement(new VariableExpression("v"))
+
+                            )
+                    )
+            ),
+            //Ref int v;new(v,20);print(rH(v)); wH(v,30);print(rH(v)+5);
+            new CompoundStatement(
+                    new VariableDeclarationStatement(new RefType(new IntType()),"v"),
+                    new CompoundStatement(
+                            new NewStatement("v",new ValueExpression(new IntegerValue(20))),
+                            new CompoundStatement(
+                                    new PrintStatement(new ReadHeapExpression(new VariableExpression("v"))),
+                                    new CompoundStatement(
+                                            new WriteHeapStatement("v",new ValueExpression(new IntegerValue(30))),
+                                            new PrintStatement(
+                                                    new ArithmeticExpression(
+                                                            new ReadHeapExpression(new VariableExpression("v")),
+                                                            new ValueExpression(new IntegerValue(5)),
+                                                            '+'
+                                                    )
+                                            )
+                                    )
+                            )
+                    )
             )
-
-
-
-
     );
+
 }

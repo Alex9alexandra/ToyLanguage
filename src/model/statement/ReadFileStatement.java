@@ -28,7 +28,7 @@ public record ReadFileStatement(Expression expression, String varName) implement
         }
 
 
-        var value = expression.evaluate(state.symbolTable());
+        var value = expression.evaluate(state.symbolTable(), state.heap());
         if(!(value instanceof StringValue stringValue)){
             throw new InvalidTypeException("Type must be String");
         }

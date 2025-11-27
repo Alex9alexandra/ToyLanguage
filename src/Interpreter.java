@@ -21,6 +21,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
+                        new HeapTable<>(),
                         programList.get(0)
                 );
                 IRepository repo1 = new Repository(prg1, "log1.txt");
@@ -31,6 +32,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
+                        new HeapTable<>(),
                         programList.get(1)
                 );
                 IRepository repo2 = new Repository(prg2, "log2.txt");
@@ -41,6 +43,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
+                        new HeapTable<>(),
                         programList.get(2)
                 );
                 IRepository repo3 = new Repository(prg3, "log3.txt");
@@ -51,6 +54,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
+                        new HeapTable<>(),
                         programList.get(3)
                 );
                 IRepository repo4 = new Repository(prg4, "log4.txt");
@@ -61,6 +65,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
+                        new HeapTable<>(),
                         programList.get(4)
                 );
                 IRepository repo5 = new Repository(prg5, "log5.txt");
@@ -71,6 +76,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
+                        new HeapTable<>(),
                         programList.get(5)
                 );
                 IRepository repo6 = new Repository(prg6, "log6.txt");
@@ -81,6 +87,7 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
+                        new HeapTable<>(),
                         programList.get(6)
                 );
                 IRepository repo7 = new Repository(prg7, "log7.txt");
@@ -91,10 +98,44 @@ import java.util.List;
                         new MapSymbolTable<>(),
                         new ListOut<>(),
                         new MapFileTable(),
+                        new HeapTable<>(),
                         programList.get(7)
                 );
                 IRepository repo8 = new Repository(prg8, "log8.txt");
                 Controller ctr8 = new Controller(repo8);
+
+                ProgramState prg9 = new ProgramState(
+                        new StackExecutionStack<>(),
+                        new MapSymbolTable<>(),
+                        new ListOut<>(),
+                        new MapFileTable(),
+                        new HeapTable<>(),
+                        programList.get(8)
+                );
+                IRepository repo9 = new Repository(prg9, "log9.txt");
+                Controller ctr9 = new Controller(repo9);
+
+                ProgramState prg10 = new ProgramState(
+                        new StackExecutionStack<>(),
+                        new MapSymbolTable<>(),
+                        new ListOut<>(),
+                        new MapFileTable(),
+                        new HeapTable<>(),
+                        programList.get(9)
+                );
+                IRepository repo10 = new Repository(prg10, "log10.txt");
+                Controller ctr10 = new Controller(repo10);
+
+                ProgramState prg11 = new ProgramState(
+                        new StackExecutionStack<>(),
+                        new MapSymbolTable<>(),
+                        new ListOut<>(),
+                        new MapFileTable(),
+                        new HeapTable<>(),
+                        programList.get(10)
+                );
+                IRepository repo11 = new Repository(prg11, "log11.txt");
+                Controller ctr11 = new Controller(repo11);
 
 
                 TextMenu menu = new TextMenu();
@@ -107,6 +148,9 @@ import java.util.List;
                 menu.addCommand(new RunExample("6", programList.get(5).toString(), ctr6,0));
                 menu.addCommand(new RunExample("7", programList.get(6).toString(), ctr7,0));
                 menu.addCommand(new RunExample("8", programList.get(7).toString(), ctr8,0));
+                menu.addCommand(new RunExample("9", programList.get(8).toString(), ctr9,0));
+                menu.addCommand(new RunExample("10", programList.get(9).toString(), ctr10,0));
+                menu.addCommand(new RunExample("11", programList.get(10).toString(), ctr11,0));
                 menu.show();
 
             }

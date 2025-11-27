@@ -14,7 +14,7 @@ public record CloseRFileStatement(Expression expression) implements Statement {
 
     @Override
     public ProgramState execute(ProgramState state) {
-        var value = expression.evaluate(state.symbolTable());
+        var value = expression.evaluate(state.symbolTable(), state.heap());
 
         if (!(value instanceof StringValue fileNameValue)) {
             throw new InvalidTypeException("Type must be String");

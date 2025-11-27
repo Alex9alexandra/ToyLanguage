@@ -4,6 +4,8 @@ import exceptions.ReadFromHeapExceptions;
 import exceptions.WriteToHeapExceptions;
 import model.value.Value;
 
+import java.util.Map;
+
 public interface Heap<V> {
     int allocate(V value);
 
@@ -16,4 +18,8 @@ public interface Heap<V> {
     String toString();
 
     Heap<V> deepCopy();
+
+    Map<Integer,V> getContent();
+
+    void setContent(Map<Integer,V> newContent);
 }

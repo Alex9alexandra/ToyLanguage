@@ -1,5 +1,6 @@
 package repository;
 
+import exceptions.InitializeLogFileException;
 import exceptions.RepositoryInvalidProgramIndexException;
 import model.state.*;
 import model.statement.Statement;
@@ -22,6 +23,12 @@ public class Repository implements IRepository {
         this.programStates=new ArrayList<>();
         programStates.add(stmt);
         this.logFilePath = path;
+
+        try (PrintWriter writer=new PrintWriter(logFilePath)){
+            writer.print("");
+        } catch (IOException e) {
+            throw new InitializeLogFileException("Could not initialize log file: " + e.getMessage());
+        }
     }
 
     @Override
@@ -61,17 +68,19 @@ public class Repository implements IRepository {
         PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
         logFile.println(getCurrentProgramState().executionStack().toString());
         logFile.println(getCurrentProgramState().symbolTable().toString());
+        logFile.println(getCurrentProgramState().heap().toString());
         logFile.println(getCurrentProgramState().out().toString());
         logFile.println(getCurrentProgramState().fileTable().toString());
         logFile.flush();
     }
+
 
     public void initializeRepository() {
         this.currentIndex = 0;
         this.programStates = new ArrayList<>();
 
         for (Statement stmt : hardcodedPrograms) {
-            ProgramState programState = new ProgramState(new StackExecutionStack<>(), new MapSymbolTable<>(), new ListOut<>(),new MapFileTable(), stmt);
+            ProgramState programState = new ProgramState(new StackExecutionStack<>(), new MapSymbolTable<>(), new ListOut<>(),new MapFileTable(),new HeapTable<>(), stmt);
             this.programStates.add(programState);
         }
     }

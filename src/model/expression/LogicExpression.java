@@ -22,9 +22,9 @@ public class LogicExpression implements Expression {
     public Value evaluate(SymbolTable<String, Value> symTable, Heap<Value> heap) throws  LogicSecOpNotBoolException,LogicFirstOpNotBoolException {
         Value v1;
         Value v2;
-        v1 = e1.evaluate(symTable);
+        v1 = e1.evaluate(symTable,heap);
         if (v1.getType().equals(new BoolType())) {
-            v2 = e2.evaluate(symTable);
+            v2 = e2.evaluate(symTable,heap);
             if (v2.getType().equals(new BoolType())) {
                 BooleanValue i1 = (BooleanValue) v1;
                 BooleanValue i2 = (BooleanValue) v2;

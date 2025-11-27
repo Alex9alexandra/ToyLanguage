@@ -79,16 +79,5 @@ public class ProgramState {
         this.heap = heap;
     }
 
-//    public boolean isNotCompleted(){
-//        return !executionStack.isEmpty();
-//    }
-//
-//    public ProgramState oneStep() throws ProgStateExecStackIsEmpty {
-//        if(executionStack.isEmpty())
-//            throw new ProgStateExecStackIsEmpty("Program state stack is empty");
-//        Statement currentStatement=executionStack.pop();
-//        return currentStatement.execute(this);
-//    }
-
 }
 

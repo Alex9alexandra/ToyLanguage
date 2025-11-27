@@ -11,10 +11,12 @@ public class TextMenu {
         commands.put(command.getKey(),command);
     }
     private void printMenu(){
-        for(Command command:commands.values()){
-            String line=String.format("%4s : %s",command.getKey(),command.getDescription());
-            System.out.println(line);
-        }
+        commands.values().stream()
+                .sorted((c1,c2)->Integer.compare(Integer.parseInt(c1.getKey()),Integer.parseInt(c2.getKey())))
+                .forEach(command->{
+                    String line=String.format("%4s : %s",command.getKey(),command.getDescription());
+                    System.out.println(line);
+                });
     }
     public void show(){
         Scanner scanner=new Scanner(System.in);

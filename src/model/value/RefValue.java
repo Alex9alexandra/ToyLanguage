@@ -26,6 +26,10 @@ public class RefValue implements Value{
         return this;
     }
 
+    public Type getLocationType() {
+        return locationType;
+    }
+
     @Override
     public Value deepCopy() {
         return new RefValue(address, locationType);

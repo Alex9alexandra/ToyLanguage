@@ -10,7 +10,7 @@ public record IfStatement(Expression condition, Statement thenBranch, Statement 
 
     @Override
     public ProgramState execute(ProgramState state) throws IfStatementNotEvalToBoolException{
-        Value result = condition.evaluate(state.symbolTable());
+        Value result = condition.evaluate(state.symbolTable(), state.heap());
         if (result instanceof BooleanValue(boolean value)) {
             if (value) {
                 state.executionStack().push(thenBranch);

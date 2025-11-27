@@ -16,7 +16,7 @@ public record AssignmentStatement(Expression expression, String variableName)
         if (!symbolTable.isDefined(variableName)) {
             throw new VariableNotDefinedException("Variable not defined");
         }
-        Value value = expression.evaluate(symbolTable);
+        Value value = expression.evaluate(symbolTable, state.heap());
         if (!value.getType().equals(symbolTable.getType(variableName))) {
             throw new AsignmentTypeMismatchException("Type mismatch");
         }

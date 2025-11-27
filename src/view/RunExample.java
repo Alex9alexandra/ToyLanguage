@@ -1,11 +1,14 @@
 package view;
 import java.util.Scanner;
+import java.util.Stack;
+
 import controller.Controller;
 import exceptions.ArithmeticDivBy0Exception;
 import exceptions.ArithmeticFirstOpNotIntException;
 import exceptions.ArithmeticInvalidOpException;
 import exceptions.VariableNotDefinedException;
 import exceptions.*;
+import model.statement.IfStatement;
 
 
 public class RunExample extends Command{
@@ -31,19 +34,32 @@ public class RunExample extends Command{
             ctr.setProgramStateID(programIndex);
             ctr.allStepExecution();
             hasRun=true;
-        } catch (VariableNotDefinedException |
-                 ArithmeticDivBy0Exception |
-                 ArithmeticInvalidOpException |
-                 ArithmeticFirstOpNotIntException |
-                 ArithmeticSecOpNotIntException |
-                 RelationalInvalidOperatorException |
-                 LogicFirstOpNotBoolException |
-                 LogicSecOpNotBoolException |
-                 FileAlreadyOpenException|
-                 FileNotOpenException|
-                 FileReadException|
-                 FileOpenException|
-                 FileCloseException
+        } catch (AddressNotInHeapException|
+                ArithmeticDivBy0Exception|
+                ArithmeticFirstOpNotIntException|
+                ArithmeticInvalidOpException|
+                ArithmeticSecOpNotIntException|
+                AsignmentTypeMismatchException|
+                ControllerExecutionStackIsEmptyException|
+                FileAlreadyOpenException|
+                FileCloseException|
+                FileNotOpenException|
+                FileOpenException|
+                IfStatementNotEvalToBoolException|
+                InvalidTypeException|
+                LogicFirstOpNotBoolException|
+                LogicSecOpNotBoolException|
+                NotRefValueEvaluatedException|
+                ProgStateExecStackIsEmpty|
+                ReadFromHeapExceptions|
+                RelationalInvalidOperatorException|
+                RepositoryInvalidProgramIndexException|
+                StackReadingFromEmptyStackException|
+                VariableAlreadyDeclaredException|
+                VariableNotDefinedException|
+                WhileStatementNotEvalToBoolException|
+                WriteToHeapExceptions|
+                 InitializeLogFileException
                  e) {
             System.out.println("Runtime error: " + e.getMessage());
 

@@ -25,9 +25,9 @@ public class ArithmeticExpression implements Expression {
     public Value evaluate(SymbolTable<String, Value> symTable, Heap<Value> heap) throws ArithmeticDivBy0Exception,ArithmeticInvalidOpException,ArithmeticSecOpNotIntException,ArithmeticFirstOpNotIntException {
         Value v1;
         Value v2;
-        v1 = e1.evaluate(symTable);
+        v1 = e1.evaluate(symTable,heap);
         if (v1.getType().equals(new IntType())) {
-            v2 = e2.evaluate(symTable);
+            v2 = e2.evaluate(symTable,heap);
             if (v2.getType().equals(new IntType())) {
                 IntegerValue i1 = (IntegerValue) v1;
                 IntegerValue i2 = (IntegerValue) v2;

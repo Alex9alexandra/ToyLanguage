@@ -30,18 +30,17 @@ public class WriteHeapStatement implements Statement {
             throw new VariableNotDefinedException("Variable not defined: " + varName);
         }
         Value varValue = symbolTable.getValue(varName);
-        if(!(varValue.getType() instanceof RefType))
+        if(!(varValue instanceof RefValue refValue))
         {
             throw new AsignmentTypeMismatchException("Variable " + varName + " is not of RefType");
         }
-        RefValue refValue= (RefValue) varValue;
         int address=refValue.getAddress();
         if(!heap.containsAddress(address))
         {
             throw new VariableNotDefinedException("Address " + address + " is not defined in the heap");
         }
         Value evaluatedValue = expression.evaluate(symbolTable, heap);
-        if(!evaluatedValue.getType().equals(refValue.getType()))
+        if(!evaluatedValue.getType().equals(refValue.getLocationType()))
         {
             throw new AsignmentTypeMismatchException("Type mismatch: variable " + varName + " and expression " + expression.toString());
         }
