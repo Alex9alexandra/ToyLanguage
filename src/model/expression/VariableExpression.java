@@ -3,6 +3,7 @@ package model.expression;
 import exceptions.VariableNotDefinedException;
 import model.state.Heap;
 import model.state.SymbolTable;
+import model.type.Type;
 import model.value.Value;
 
 public class VariableExpression implements Expression {
@@ -30,4 +31,9 @@ public class VariableExpression implements Expression {
     public Expression deepCopy() {
         return new VariableExpression(variableName);
     }
+
+//    @Override
+//    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws Exception {
+//        return typeEnv.getType(variableName);
+//    }
 }

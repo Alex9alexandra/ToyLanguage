@@ -3,6 +3,7 @@ package model.expression;
 import exceptions.*;
 import model.state.Heap;
 import model.state.SymbolTable;
+import model.type.Type;
 import model.value.Value;
 
 public interface Expression {
@@ -10,4 +11,6 @@ public interface Expression {
 
     String toString();
     Expression deepCopy();
+
+    //Type typeCheck(SymbolTable<String,Type> typeEnv) throws Exception;
 }

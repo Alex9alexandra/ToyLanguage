@@ -33,7 +33,7 @@ public record CloseRFileStatement(Expression expression) implements Statement {
         }
 
         state.fileTable().closeFile(fileNameValue);
-        return state;
+        return null;
     }
 
     @Override

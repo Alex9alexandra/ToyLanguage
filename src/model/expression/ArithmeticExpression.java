@@ -7,6 +7,7 @@ import exceptions.ArithmeticSecOpNotIntException;
 import model.state.Heap;
 import model.state.SymbolTable;
 import model.type.IntType;
+import model.type.Type;
 import model.value.IntegerValue;
 import model.value.Value;
 
@@ -59,5 +60,21 @@ public class ArithmeticExpression implements Expression {
     public Expression deepCopy() {
         return new ArithmeticExpression(e1.deepCopy(), e2.deepCopy(), operator);
     }
+
+//    @Override
+//    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws Exception {
+//        Type typ1,typ2;
+//        typ1=e1.typeCheck(typeEnv);
+//        typ2=e2.typeCheck(typeEnv);
+//        if (typ1.equals(new IntType()))
+//        {
+//            if (typ2.equals(new IntType()))
+//            {
+//                return new IntType();
+//            }
+//            else throw new ArithmeticSecOpNotIntException("Second operand is not an integer");
+//        }
+//        else throw new ArithmeticFirstOpNotIntException("First operand is not an integer");
+//    }
 }
 

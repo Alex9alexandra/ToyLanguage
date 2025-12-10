@@ -30,7 +30,7 @@ public record OpenRFileStatement(Expression expression) implements Statement{
         }
         state.fileTable().addOpenFile(fileNameValue, bufferReader);
 
-        return state;
+        return null;
     }
 
     @Override

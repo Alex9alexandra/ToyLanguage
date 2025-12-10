@@ -2,6 +2,7 @@ package model.expression;
 
 import model.state.Heap;
 import model.state.SymbolTable;
+import model.type.Type;
 import model.value.Value;
 
 public class ValueExpression implements Expression {
@@ -25,4 +26,9 @@ public class ValueExpression implements Expression {
     public Expression deepCopy() {
         return new ValueExpression(e.deepCopy());
     }
+
+//    @Override
+//    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws Exception {
+//        return e.getType();
+//    }
 }

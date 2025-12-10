@@ -52,4 +52,13 @@ public class MapSymbolTable<S, V> implements SymbolTable<S, V> {
     public Map<S, V> getContent() {
         return map;
     }
+
+    @Override
+    public SymbolTable<S, V> deepCopy() {
+        MapSymbolTable<S, V> copy = new MapSymbolTable<>();
+        for (Map.Entry<S, V> entry : map.entrySet()) {
+            copy.map.put(entry.getKey(), (V) ((Value) entry.getValue()).deepCopy());
+        }
+        return copy;
+    }
 }

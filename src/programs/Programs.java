@@ -199,6 +199,57 @@ public class Programs {
                                     )
                             )
                     )
+            ),
+            //Ref int v;new(v,20);print(rH(a)); wH(v,30);print(rH(v)+5);
+            new CompoundStatement(
+                    new VariableDeclarationStatement(new RefType(new IntType()),"v"),
+            new CompoundStatement(
+                            new NewStatement("v",new ValueExpression(new IntegerValue(20))),
+            new CompoundStatement(
+                                    new PrintStatement(new ReadHeapExpression(new VariableExpression("a"))),
+            new CompoundStatement(
+                                            new WriteHeapStatement("v",new ValueExpression(new IntegerValue(30))),
+            new PrintStatement(
+                                                    new ArithmeticExpression(
+                    new ReadHeapExpression(new VariableExpression("v")),
+            new ValueExpression(new IntegerValue(5)),
+            '+'
+            )
+            )
+            )
+            )
+            )
+            ),
+            //int v; Ref int a; v=10;new(a,22); fork(wH(a,30);v=32;print(v);print(rH(a)));  print(v);print(rH(a)
+            new CompoundStatement(
+                    new VariableDeclarationStatement(new IntType(),"v"),
+                    new CompoundStatement(
+                            new VariableDeclarationStatement(new RefType(new IntType()),"a"),
+                            new CompoundStatement(
+                                    new AssignmentStatement(new ValueExpression(new IntegerValue(10)),"v"),
+                                    new CompoundStatement(
+                                            new NewStatement("a",new ValueExpression(new IntegerValue(22))),
+                                            new CompoundStatement(
+                                                    new ForkStatement(
+                                                            new CompoundStatement(
+                                                                    new WriteHeapStatement("a",new ValueExpression(new IntegerValue(30))),
+                                                                    new CompoundStatement(
+                                                                            new AssignmentStatement(new ValueExpression(new IntegerValue(32)),"v"),
+                                                                            new CompoundStatement(
+                                                                                    new PrintStatement(new VariableExpression("v")),
+                                                                                    new PrintStatement(new ReadHeapExpression(new VariableExpression("a")))
+                                                                            )
+                                                                    )
+                                                            )
+                                                    ),
+                                                    new CompoundStatement(
+                                                            new PrintStatement(new VariableExpression("v")),
+                                                            new PrintStatement(new ReadHeapExpression(new VariableExpression("a")))
+                                                    )
+                                            )
+                                    )
+                            )
+                    )
             )
     );
 

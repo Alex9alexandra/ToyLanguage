@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.List;
 
 public interface IRepository {
-    public List<ProgramState> getProgramStates();
+    public List<ProgramState> getPrgList();
 
-    public ProgramState getCurrentProgramState();
+    //public ProgramState getCurrentProgramState();
 
     void addProgramState(ProgramState state);
 
@@ -19,5 +19,9 @@ public interface IRepository {
 
     void setCurrentIndex(int index) throws RepositoryInvalidProgramIndexException;
 
-    void logProgramStateExecution() throws IOException;
+    void logProgramStateExecution(ProgramState prgState) throws IOException;
+
+    void setPrgList(List<ProgramState> prgList);
+
+
 }

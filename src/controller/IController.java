@@ -3,8 +3,10 @@ package controller;
 import exceptions.*;
 import model.state.ProgramState;
 
+import java.util.List;
+
 public interface IController {
-    ProgramState oneStepExecution(ProgramState state) ;
+    //ProgramState oneStepExecution(ProgramState state) ;
 
     void allStepExecution() throws Exception;
 
@@ -18,5 +20,11 @@ public interface IController {
 
     int getProgramStateID();
 
-    void setProgramStateID(int id) ;
+    //void setProgramStateID(int id) ;
+
+    List<ProgramState> removeCompletedPrograms(List<ProgramState> inProgramList);
+
+    void oneStepForAllPrograms(List<ProgramState> programList) throws InterruptedException;
+
+    void initializeProgramState(int programID) ;
 }

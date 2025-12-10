@@ -31,7 +31,7 @@ public class RunExample extends Command{
             System.out.println("Show steps? (1-y/0-n)");
             int display = scanner.nextInt();
             ctr.setDisplayFlag(display==1);
-            ctr.setProgramStateID(programIndex);
+            ctr.initializeProgramState(programIndex);
             ctr.allStepExecution();
             hasRun=true;
         } catch (AddressNotInHeapException|
@@ -59,7 +59,8 @@ public class RunExample extends Command{
                 VariableNotDefinedException|
                 WhileStatementNotEvalToBoolException|
                 WriteToHeapExceptions|
-                 InitializeLogFileException
+                 InitializeLogFileException|
+                 ProgramStateStackIsEmptyException
                  e) {
             System.out.println("Runtime error: " + e.getMessage());
 

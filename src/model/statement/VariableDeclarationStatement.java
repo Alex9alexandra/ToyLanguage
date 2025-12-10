@@ -14,7 +14,7 @@ public record VariableDeclarationStatement(Type type, String variableName) imple
             throw new VariableAlreadyDeclaredException("Variable already defined");
         }
         symbolTable.declareVariable(variableName, type);
-        return state;
+        return null;
     }
 
     @Override

@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Repository implements IRepository {
-    List<ProgramState> programStates;
-    int currentIndex;
-    String logFilePath;
+    private List<ProgramState> programStates;
+    private int currentIndex;
+    private String logFilePath;
 
     public Repository(ProgramState stmt,String path) {
         this.programStates=new ArrayList<>();
@@ -32,14 +32,20 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public List<ProgramState> getProgramStates() {
+    public List<ProgramState> getPrgList() {
         return programStates;
     }
 
+
     @Override
-    public ProgramState getCurrentProgramState() {
-        return programStates.get(currentIndex);
+    public void setPrgList(List<ProgramState> prgList) {
+        this.programStates = prgList;
     }
+
+//    @Override
+//    public ProgramState getCurrentProgramState() {
+//        return programStates.get(currentIndex);
+//    }
 
     @Override
     public void addProgramState(ProgramState state) {
@@ -64,25 +70,30 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public void logProgramStateExecution() throws IOException {
+    public void logProgramStateExecution(ProgramState prgState) throws IOException {
         PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
-        logFile.println(getCurrentProgramState().executionStack().toString());
-        logFile.println(getCurrentProgramState().symbolTable().toString());
-        logFile.println(getCurrentProgramState().heap().toString());
-        logFile.println(getCurrentProgramState().out().toString());
-        logFile.println(getCurrentProgramState().fileTable().toString());
+        logFile.println("Program State ID: " + prgState.getId());
+        logFile.println(prgState.executionStack().toString());
+        logFile.println(prgState.symbolTable().toString());
+        logFile.println(prgState.heap().toString());
+        logFile.println(prgState.out().toString());
+        logFile.println(prgState.fileTable().toString());
+        logFile.println("--------------------------------------------------");
         logFile.flush();
     }
 
 
-    public void initializeRepository() {
-        this.currentIndex = 0;
-        this.programStates = new ArrayList<>();
 
-        for (Statement stmt : hardcodedPrograms) {
-            ProgramState programState = new ProgramState(new StackExecutionStack<>(), new MapSymbolTable<>(), new ListOut<>(),new MapFileTable(),new HeapTable<>(), stmt);
-            this.programStates.add(programState);
-        }
-    }
+
+
+//    public void initializeRepository() {
+//        this.currentIndex = 0;
+//        this.programStates = new ArrayList<>();
+//
+//        for (Statement stmt : hardcodedPrograms) {
+//            ProgramState programState = new ProgramState(new StackExecutionStack<>(), new MapSymbolTable<>(), new ListOut<>(),new MapFileTable(),new HeapTable<>(), stmt);
+//            this.programStates.add(programState);
+//        }
+//    }
 
 }

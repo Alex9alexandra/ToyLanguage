@@ -35,7 +35,7 @@ public record NewStatement(String variableName, Expression expression) implement
         }
         int address=heap.allocate(value);
         symbolTable.update(variableName, new RefValue(address,refType.getInner()));
-        return state;
+        return null;
     }
 
     @Override

@@ -19,4 +19,6 @@ public interface SymbolTable<S, V> {
     String toString();
 
     Map<S, V> getContent();
+
+    SymbolTable<S,V> deepCopy();
 }

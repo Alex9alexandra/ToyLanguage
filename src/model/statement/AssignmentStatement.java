@@ -21,7 +21,7 @@ public record AssignmentStatement(Expression expression, String variableName)
             throw new AsignmentTypeMismatchException("Type mismatch");
         }
         symbolTable.update(variableName, value);
-        return state;
+        return null;
     }
 
     @Override

@@ -31,13 +31,14 @@ public class View {
         try {
             System.out.println("Enter the program you want to run (1-6): ");
             int programId = scanner.nextInt();
-            this.controller.setProgramStateID(programId - 1);
 
             System.out.println("Show execution steps? 1-yes, 0-no : ");
             int displayFlag = scanner.nextInt();
 
             controller.setDisplayFlag(displayFlag == 1);
-            this.controller.allStepExecution();
+            this.controller.initializeProgramState(programId-1);
+
+            controller.allStepExecution();
 
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());

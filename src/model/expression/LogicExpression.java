@@ -4,6 +4,7 @@ import exceptions.*;
 import model.state.Heap;
 import model.state.SymbolTable;
 import model.type.BoolType;
+import model.type.Type;
 import model.value.BooleanValue;
 import model.value.Value;
 
@@ -58,5 +59,22 @@ public class LogicExpression implements Expression {
     public Expression deepCopy() {
         return new LogicExpression(e1.deepCopy(), e2.deepCopy(), operator);
     }
+
+//    @Override
+//    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws Exception {
+//        Type typ1,typ2;
+//        typ1=e1.typeCheck(typeEnv);
+//        typ2=e2.typeCheck(typeEnv);
+//        if(typ1.equals(new BoolType()))
+//        {
+//            if(typ2.equals(new BoolType()))
+//            {
+//                return new BoolType();
+//            }
+//            else throw new LogicSecOpNotBoolException("Second operand is not a boolean");
+//
+//        }
+//        else throw new LogicFirstOpNotBoolException("First operand is not a boolean");
+//    }
 
 }

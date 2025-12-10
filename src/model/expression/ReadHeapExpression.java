@@ -3,8 +3,12 @@ package model.expression;
 import exceptions.*;
 import model.state.Heap;
 import model.state.SymbolTable;
+import model.type.RefType;
+import model.type.Type;
 import model.value.RefValue;
 import model.value.Value;
+
+import java.sql.Ref;
 
 public class ReadHeapExpression implements Expression {
     Expression expression;
@@ -31,6 +35,15 @@ public class ReadHeapExpression implements Expression {
     public Expression deepCopy() {
         return new ReadHeapExpression(expression.deepCopy());
     }
+
+//    @Override
+//    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws Exception {
+//        Type typ= expression.typeCheck(typeEnv);
+//        if(typ instanceof RefType){
+//            RefType reft=(RefType) typ;
+//            return reft.getInner();
+//        }else throw new NotRefValueEvaluatedException("The expression is not ref type");
+//    }
 
     @Override
     public String toString() {

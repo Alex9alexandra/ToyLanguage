@@ -45,7 +45,7 @@ public class WriteHeapStatement implements Statement {
             throw new AsignmentTypeMismatchException("Type mismatch: variable " + varName + " and expression " + expression.toString());
         }
         heap.write(address, evaluatedValue);
-        return state;
+        return null;
     }
 
     @Override

@@ -31,7 +31,7 @@ public class WhileStatement implements Statement{
         }
         else
             throw new WhileStatementNotEvalToBoolException("While condition not evaluated to boolean");
-        return state;
+        return null;
     }
 
     @Override

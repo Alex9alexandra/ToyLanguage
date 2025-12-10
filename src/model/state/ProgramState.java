@@ -1,6 +1,7 @@
 package model.state;
 
 import exceptions.ProgStateExecStackIsEmpty;
+import exceptions.ProgramStateStackIsEmptyException;
 import model.statement.Statement;
 import model.value.Value;
 
@@ -11,20 +12,23 @@ public class ProgramState {
     Heap<Value> heap;
     Statement originalProgram;
     FileTable fileTable;
+    private int id;
+    private static int lastId =0;
 
-    public ProgramState(ExecutionStack<Statement> executionStack, SymbolTable<String, Value> symbolTable, Out<Value> out,FileTable fileTable,Heap<Value> heap, Statement program) {
+    public ProgramState(ExecutionStack<Statement> executionStack, SymbolTable<String, Value> symbolTable, Out<Value> out, FileTable fileTable, Heap<Value> heap, Statement program) {
         this.executionStack = executionStack;
         this.symbolTable = symbolTable;
         this.out = out;
         this.originalProgram = program.deepCopy();
         this.executionStack.push(program);
-        this.heap=heap;
+        this.heap = heap;
         this.fileTable = fileTable;
+        this.id = getNewID();
     }
 
     @Override
     public String toString() {
-        return  executionStack.toString() + "\n"  + symbolTable.toString() +"\n"+ heap.toString() + "\n"  + fileTable.toString()+ "\n"+ out.toString() + "\n";
+        return "ProgramState ID: "+id+"\n"+executionStack.toString() + "\n" + symbolTable.toString() + "\n" + heap.toString() + "\n" + fileTable.toString() + "\n" + out.toString() + "\n";
     }
 
     private Statement deepCopy(Statement program) {
@@ -77,6 +81,26 @@ public class ProgramState {
 
     public void setHeap(Heap heap) {
         this.heap = heap;
+    }
+
+    public Boolean isNotCompleted() {
+        return !executionStack.isEmpty();
+    }
+
+    public ProgramState oneStepExecution() throws ProgramStateStackIsEmptyException {
+        if (executionStack.isEmpty())
+            throw new ProgramStateStackIsEmptyException("PrgState stack is empty");
+        Statement currentStatement = executionStack.pop();
+        return currentStatement.execute(this);
+    }
+
+    public static synchronized int getNewID() {
+        lastId++;
+        return lastId;
+    }
+
+    public int getId() {
+        return id;
     }
 
 }
