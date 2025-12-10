@@ -3,6 +3,7 @@ package model.expression;
 import exceptions.*;
 import model.state.Heap;
 import model.state.SymbolTable;
+import model.type.BoolType;
 import model.type.IntType;
 import model.type.Type;
 import model.value.BooleanValue;
@@ -52,21 +53,21 @@ public class RelationalExpression implements Expression {
         return new RelationalExpression(exp1.deepCopy(), exp2.deepCopy(), operator);
     }
 
-//    @Override
-//    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws Exception {
-//        Type typ1,typ2;
-//        typ1=exp1.typeCheck(typeEnv);
-//        typ2=exp2.typeCheck(typeEnv);
-//        if(typ1.equals(new IntType()))
-//        {
-//            if (typ2.equals(new IntType())){
-//                return new IntType();
-//            }
-//            else
-//                throw new ArithmeticSecOpNotIntException("Second operand is not an integer");
-//        }
-//        throw new ArithmeticFirstOpNotIntException("First operand is not an integer");
-//    }
+    @Override
+    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws ArithmeticSecOpNotIntException,ArithmeticFirstOpNotIntException {
+        Type typ1,typ2;
+        typ1=exp1.typeCheck(typeEnv);
+        typ2=exp2.typeCheck(typeEnv);
+        if(typ1.equals(new IntType()))
+        {
+            if (typ2.equals(new IntType())){
+                return new BoolType();
+            }
+            else
+                throw new ArithmeticSecOpNotIntException("Second operand is not an integer");
+        }
+        throw new ArithmeticFirstOpNotIntException("First operand is not an integer");
+    }
 
     @Override
     public String toString() {

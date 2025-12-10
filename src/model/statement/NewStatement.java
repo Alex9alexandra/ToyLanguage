@@ -6,6 +6,7 @@ import exceptions.VariableAlreadyDeclaredException;
 import exceptions.VariableNotDefinedException;
 import model.expression.Expression;
 import model.state.ProgramState;
+import model.state.SymbolTable;
 import model.type.RefType;
 import model.type.Type;
 import model.value.IntegerValue;
@@ -41,6 +42,16 @@ public record NewStatement(String variableName, Expression expression) implement
     @Override
     public Statement deepCopy() {
         return new NewStatement(variableName,expression.deepCopy());
+    }
+
+    @Override
+    public SymbolTable<String, Type> typeCheck(SymbolTable<String, Type> typeEnv) throws AsignmentTypeMismatchException {
+        Type typevar=typeEnv.getType(variableName);
+        Type typexp=expression.typeCheck(typeEnv);
+        if(typevar.equals(new RefType(typexp)))
+            return typeEnv;
+        else
+            throw new AsignmentTypeMismatchException("Variable " + variableName + " is not of RefType");
     }
 
     @Override

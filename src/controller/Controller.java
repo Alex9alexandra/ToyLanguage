@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -71,6 +72,9 @@ public class Controller implements IController {
                     heap.getContent()
             );
             heap.setContent(newHeap);
+            programList = removeCompletedPrograms(programList);
+            if(programList.size()==0)
+                break;
             try{
                 oneStepForAllPrograms(programList);
             } catch(Exception e)
@@ -79,8 +83,8 @@ public class Controller implements IController {
                 break;
             }
 
-
             programList = removeCompletedPrograms(repo.getPrgList());
+
         }
         executor.shutdownNow();
         repo.setPrgList(programList);
@@ -138,7 +142,15 @@ public class Controller implements IController {
                 .map(future->
                 {try {
                     return future.get();
-                }catch(Exception e){
+                }catch(ExecutionException e){
+                    if(e.getCause() instanceof ProgramStateStackIsEmptyException){
+                        return null;
+                    }
+                    else {
+                        throw new RuntimeException(e.getCause());
+                    }
+                }
+                catch(Exception e){
                     throw new RuntimeException(e);
                 }
                 })
@@ -199,6 +211,9 @@ public class Controller implements IController {
     public void initializeProgramState(int programIndex)
     {
         Statement stmt = Programs.hardcodedPrograms.get(programIndex);
+
+        stmt.typeCheck(new MapSymbolTable<>());
+
         ProgramState programState = new ProgramState(
                 new StackExecutionStack<>(),
                 new MapSymbolTable<>(),

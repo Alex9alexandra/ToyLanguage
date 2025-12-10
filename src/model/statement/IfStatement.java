@@ -3,6 +3,9 @@ package model.statement;
 import exceptions.IfStatementNotEvalToBoolException;
 import model.expression.Expression;
 import model.state.ProgramState;
+import model.state.SymbolTable;
+import model.type.BoolType;
+import model.type.Type;
 import model.value.BooleanValue;
 import model.value.Value;
 
@@ -31,6 +34,20 @@ public record IfStatement(Expression condition, Statement thenBranch, Statement 
     @Override
     public Statement deepCopy() {
         return new IfStatement(condition.deepCopy(), thenBranch.deepCopy(), elseBranch.deepCopy());
+    }
+
+
+    @Override
+    public SymbolTable<String, Type> typeCheck(SymbolTable<String, Type> typeEnv) throws IfStatementNotEvalToBoolException {
+        Type typexp=condition.typeCheck(typeEnv);
+        if(typexp.equals(new BoolType()))
+        {
+            thenBranch.typeCheck(typeEnv.deepCopy());
+            elseBranch.typeCheck(typeEnv.deepCopy());
+            return typeEnv;
+        }
+        else
+            throw new IfStatementNotEvalToBoolException("Condition expression does not evaluate to a boolean.");
     }
 }
 

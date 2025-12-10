@@ -1,6 +1,7 @@
 package model.state;
 
 
+import exceptions.VariableNotDefinedException;
 import model.value.Value;
 import model.type.Type;
 
@@ -17,7 +18,10 @@ public class MapSymbolTable<S, V> implements SymbolTable<S, V> {
     }
 
     @Override
-    public Type getType(S variableName) {
+    public Type getType(S variableName) throws VariableNotDefinedException{
+        if(!map.containsKey(variableName)){
+            throw new VariableNotDefinedException("Variable not defined");
+        }
         return ((Value) map.get(variableName)).getType();
     }
 

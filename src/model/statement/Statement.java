@@ -1,10 +1,9 @@
 package model.statement;
 
-import exceptions.AsignmentTypeMismatchException;
-import exceptions.IfStatementNotEvalToBoolException;
-import exceptions.VariableAlreadyDeclaredException;
-import exceptions.VariableNotDefinedException;
+import exceptions.*;
 import model.state.ProgramState;
+import model.state.SymbolTable;
+import model.type.Type;
 
 
 public interface Statement {
@@ -12,4 +11,5 @@ public interface Statement {
 
     String toString();
     Statement deepCopy();
+    SymbolTable<String, Type> typeCheck(SymbolTable<String,Type> typeEnv) throws AsignmentTypeMismatchException, InvalidTypeException,IfStatementNotEvalToBoolException,WhileStatementNotEvalToBoolException;
 }

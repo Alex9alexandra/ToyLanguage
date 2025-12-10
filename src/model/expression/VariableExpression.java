@@ -32,8 +32,8 @@ public class VariableExpression implements Expression {
         return new VariableExpression(variableName);
     }
 
-//    @Override
-//    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws Exception {
-//        return typeEnv.getType(variableName);
-//    }
+    @Override
+    public Type typeCheck(SymbolTable<String, Type> typeEnv)  {
+        return typeEnv.getType(variableName);
+    }
 }

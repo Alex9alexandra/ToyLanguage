@@ -6,7 +6,9 @@ import exceptions.VariableAlreadyDeclaredException;
 import exceptions.VariableNotDefinedException;
 import model.expression.Expression;
 import model.state.ProgramState;
+import model.state.SymbolTable;
 import model.type.RefType;
+import model.type.Type;
 import model.value.RefValue;
 import model.value.Value;
 
@@ -51,6 +53,21 @@ public class WriteHeapStatement implements Statement {
     @Override
     public Statement deepCopy() {
         return new WriteHeapStatement(varName,expression.deepCopy());
+    }
+
+    @Override
+    public SymbolTable<String, Type> typeCheck(SymbolTable<String, Type> typeEnv) throws AsignmentTypeMismatchException {
+        Type typevar=typeEnv.getType(varName);
+        if(typevar instanceof RefType refType)
+        {
+            Type typexp=expression.typeCheck(typeEnv);
+            if(typexp.equals(refType.getInner()))
+                return typeEnv;
+            else
+                throw new AsignmentTypeMismatchException("Type mismatch: variable " + varName + " and expression " + expression.toString());
+        }
+        else
+            throw new AsignmentTypeMismatchException("Variable " + varName + " is not of RefType");
     }
 
     @Override

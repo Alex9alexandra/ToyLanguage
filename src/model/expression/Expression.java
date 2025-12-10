@@ -12,5 +12,5 @@ public interface Expression {
     String toString();
     Expression deepCopy();
 
-    //Type typeCheck(SymbolTable<String,Type> typeEnv) throws Exception;
+    Type typeCheck(SymbolTable<String,Type> typeEnv) throws ArithmeticSecOpNotIntException,ArithmeticFirstOpNotIntException,LogicSecOpNotBoolException,LogicFirstOpNotBoolException,NotRefValueEvaluatedException;
 }

@@ -7,6 +7,7 @@ import exceptions.VariableNotDefinedException;
 import model.state.ProgramState;
 import model.state.StackExecutionStack;
 import model.state.SymbolTable;
+import model.type.Type;
 import model.value.Value;
 
 public class ForkStatement implements Statement {
@@ -28,6 +29,12 @@ public class ForkStatement implements Statement {
     @Override
     public Statement deepCopy() {
         return new ForkStatement(statement.deepCopy());
+    }
+
+    @Override
+    public SymbolTable<String, Type> typeCheck(SymbolTable<String, Type> typeEnv) {
+        statement.typeCheck(typeEnv.deepCopy());
+        return typeEnv;
     }
 
     @Override

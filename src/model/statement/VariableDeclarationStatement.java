@@ -1,6 +1,7 @@
 package model.statement;
 
 import exceptions.VariableAlreadyDeclaredException;
+import model.state.SymbolTable;
 import model.type.Type;
 import model.state.ProgramState;
 
@@ -25,5 +26,11 @@ public record VariableDeclarationStatement(Type type, String variableName) imple
     @Override
     public Statement deepCopy() {
         return new VariableDeclarationStatement(type.deepCopy(), variableName);
+    }
+
+    @Override
+    public SymbolTable<String, Type> typeCheck(SymbolTable<String, Type> typeEnv)  {
+        typeEnv.declareVariable(variableName,type);
+        return typeEnv;
     }
 }

@@ -250,7 +250,15 @@ public class Programs {
                                     )
                             )
                     )
-            )
+            ),
+            //int v; v=true;Print(v)
+            new CompoundStatement(
+                    new VariableDeclarationStatement(new IntType(), "v"),
+                    new CompoundStatement(
+                            new AssignmentStatement(
+                                    new ValueExpression(new BooleanValue(true)), "v"),
+                            new PrintStatement(
+                                    new VariableExpression("v"))))
     );
 
 }

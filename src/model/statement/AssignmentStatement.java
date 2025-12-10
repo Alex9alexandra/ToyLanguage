@@ -3,6 +3,7 @@ package model.statement;
 import exceptions.AsignmentTypeMismatchException;
 import exceptions.VariableNotDefinedException;
 import model.expression.Expression;
+import model.type.Type;
 import model.value.Value;
 import model.state.ProgramState;
 import model.state.SymbolTable;
@@ -32,5 +33,17 @@ public record AssignmentStatement(Expression expression, String variableName)
     @Override
     public Statement deepCopy() {
         return new AssignmentStatement(expression.deepCopy(), variableName);
+    }
+
+    @Override
+    public SymbolTable<String, Type> typeCheck(SymbolTable<String, Type> typeEnv) throws AsignmentTypeMismatchException {
+
+        Type typevar=typeEnv.getType(variableName);
+        Type typexp=expression.typeCheck(typeEnv);
+        if(typevar.equals(typexp))
+            return typeEnv;
+        else
+            throw new AsignmentTypeMismatchException("Type mismatch");
+
     }
 }

@@ -3,6 +3,9 @@ package model.statement;
 import exceptions.*;
 import model.expression.Expression;
 import model.state.ProgramState;
+import model.state.SymbolTable;
+import model.type.BoolType;
+import model.type.Type;
 import model.value.BooleanValue;
 import model.value.Value;
 
@@ -37,6 +40,15 @@ public class WhileStatement implements Statement{
     @Override
     public Statement deepCopy() {
         return new WhileStatement(expression.deepCopy(),body.deepCopy());
+    }
+
+    @Override
+    public SymbolTable<String, Type> typeCheck(SymbolTable<String, Type> typeEnv) throws WhileStatementNotEvalToBoolException {
+        Type t=expression.typeCheck(typeEnv);
+        if(!t.equals(new BoolType()))
+            throw new WhileStatementNotEvalToBoolException("While condition not evaluated to boolean");
+        body.typeCheck(typeEnv.deepCopy());
+        return typeEnv;
     }
 
     @Override

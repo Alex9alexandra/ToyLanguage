@@ -1,6 +1,8 @@
 package model.statement;
 
 import model.state.ProgramState;
+import model.state.SymbolTable;
+import model.type.Type;
 
 public record CompoundStatement(Statement first, Statement second) implements Statement {
 
@@ -21,5 +23,10 @@ public record CompoundStatement(Statement first, Statement second) implements St
     @Override
     public Statement deepCopy() {
         return new CompoundStatement(first.deepCopy(), second.deepCopy());
+    }
+
+    @Override
+    public SymbolTable<String, Type> typeCheck(SymbolTable<String, Type> typeEnv)  {
+        return second.typeCheck(first.typeCheck(typeEnv));
     }
 }

@@ -6,6 +6,7 @@ import exceptions.InvalidTypeException;
 import exceptions.VariableNotDefinedException;
 import model.expression.Expression;
 import model.state.ProgramState;
+import model.state.SymbolTable;
 import model.type.IntType;
 import model.type.Type;
 import model.value.IntegerValue;
@@ -60,6 +61,27 @@ public record ReadFileStatement(Expression expression, String varName) implement
     @Override
     public Statement deepCopy() {
         return new ReadFileStatement(expression.deepCopy(), varName);
+    }
+
+    @Override
+    public SymbolTable<String, Type> typeCheck(SymbolTable<String, Type> typeEnv) throws InvalidTypeException {
+        Type typexp=expression.typeCheck(typeEnv);
+        Type typevar=typeEnv.getType(varName);
+        if(typexp.equals(new StringValue("").getType()))
+        {
+            if(typevar.equals(new IntegerValue(0).getType()))
+            {
+                return typeEnv;
+            }
+            else
+            {
+                throw new InvalidTypeException("Variable " + varName + " is not of type int");
+            }
+        }
+        else
+        {
+            throw new InvalidTypeException("Expression " + expression.toString() + " is not of type string");
+        }
     }
 }
 

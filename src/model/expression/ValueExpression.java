@@ -27,8 +27,8 @@ public class ValueExpression implements Expression {
         return new ValueExpression(e.deepCopy());
     }
 
-//    @Override
-//    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws Exception {
-//        return e.getType();
-//    }
+    @Override
+    public Type typeCheck(SymbolTable<String, Type> typeEnv)  {
+        return e.getType();
+    }
 }

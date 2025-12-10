@@ -2,6 +2,8 @@ package model.statement;
 
 import model.expression.Expression;
 import model.state.ProgramState;
+import model.state.SymbolTable;
+import model.type.Type;
 
 public record PrintStatement(Expression expression) implements Statement {
 
@@ -19,5 +21,11 @@ public record PrintStatement(Expression expression) implements Statement {
     @Override
     public Statement deepCopy() {
         return new PrintStatement(expression.deepCopy());
+    }
+
+    @Override
+    public SymbolTable<String, Type> typeCheck(SymbolTable<String, Type> typeEnv)  {
+        expression.typeCheck(typeEnv);
+        return typeEnv;
     }
 }

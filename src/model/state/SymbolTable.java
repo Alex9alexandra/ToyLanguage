@@ -1,5 +1,6 @@
 package model.state;
 
+import exceptions.VariableNotDefinedException;
 import model.type.Type;
 import model.value.Value;
 
@@ -8,7 +9,7 @@ import java.util.Map;
 public interface SymbolTable<S, V> {
     boolean isDefined(S variableName);
 
-    Type getType(S variableName);
+    Type getType(S variableName) throws VariableNotDefinedException;
 
     void declareVariable(S variableName, Type type);
 

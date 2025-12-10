@@ -36,14 +36,14 @@ public class ReadHeapExpression implements Expression {
         return new ReadHeapExpression(expression.deepCopy());
     }
 
-//    @Override
-//    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws Exception {
-//        Type typ= expression.typeCheck(typeEnv);
-//        if(typ instanceof RefType){
-//            RefType reft=(RefType) typ;
-//            return reft.getInner();
-//        }else throw new NotRefValueEvaluatedException("The expression is not ref type");
-//    }
+    @Override
+    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws NotRefValueEvaluatedException {
+        Type typ= expression.typeCheck(typeEnv);
+        if(typ instanceof RefType){
+            RefType reft=(RefType) typ;
+            return reft.getInner();
+        }else throw new NotRefValueEvaluatedException("The expression is not ref type");
+    }
 
     @Override
     public String toString() {

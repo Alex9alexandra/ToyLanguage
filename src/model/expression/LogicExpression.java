@@ -60,21 +60,21 @@ public class LogicExpression implements Expression {
         return new LogicExpression(e1.deepCopy(), e2.deepCopy(), operator);
     }
 
-//    @Override
-//    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws Exception {
-//        Type typ1,typ2;
-//        typ1=e1.typeCheck(typeEnv);
-//        typ2=e2.typeCheck(typeEnv);
-//        if(typ1.equals(new BoolType()))
-//        {
-//            if(typ2.equals(new BoolType()))
-//            {
-//                return new BoolType();
-//            }
-//            else throw new LogicSecOpNotBoolException("Second operand is not a boolean");
-//
-//        }
-//        else throw new LogicFirstOpNotBoolException("First operand is not a boolean");
-//    }
+    @Override
+    public Type typeCheck(SymbolTable<String, Type> typeEnv) throws LogicSecOpNotBoolException,LogicFirstOpNotBoolException {
+        Type typ1,typ2;
+        typ1=e1.typeCheck(typeEnv);
+        typ2=e2.typeCheck(typeEnv);
+        if(typ1.equals(new BoolType()))
+        {
+            if(typ2.equals(new BoolType()))
+            {
+                return new BoolType();
+            }
+            else throw new LogicSecOpNotBoolException("Second operand is not a boolean");
+
+        }
+        else throw new LogicFirstOpNotBoolException("First operand is not a boolean");
+    }
 
 }
