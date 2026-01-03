@@ -1,6 +1,7 @@
 package model.state;
 
 import java.io.BufferedReader;
+import java.util.Map;
 import java.util.Set;
 
 import model.value.StringValue;
@@ -17,4 +18,6 @@ public interface FileTable {
     Set<StringValue> keySet();
 
     String toString();
+
+    Map<StringValue, BufferedReader> getContent();
 }

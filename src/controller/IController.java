@@ -27,4 +27,8 @@ public interface IController {
     void oneStepForAllPrograms(List<ProgramState> programList) throws InterruptedException;
 
     void initializeProgramState(int programID) ;
+
+    List<ProgramState> getProgramStates();
+
+    void oneGUIStep() throws Exception;
 }

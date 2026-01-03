@@ -50,4 +50,9 @@ public class MapFileTable implements FileTable {
         }
         return sb.toString();
     }
+
+    @Override
+    public Map<StringValue, BufferedReader> getContent() {
+        return fileTable;
+    }
 }

@@ -38,4 +38,9 @@ public class StackExecutionStack<T> implements ExecutionStack<T> {
         return stack.isEmpty();
     }
 
+    @Override
+    public List<T> getContent() {
+        return stack;
+    }
+
 }

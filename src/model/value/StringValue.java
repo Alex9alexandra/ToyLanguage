@@ -33,4 +33,8 @@ public record StringValue(String value) implements Value {
     public Value deepCopy() {
         return new StringValue(value);
     }
+
+    public String getInnerValue() {
+        return value;
+    }
 }

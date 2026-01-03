@@ -2,6 +2,8 @@ package model.state;
 
 import exceptions.StackReadingFromEmptyStackException;
 
+import java.util.List;
+
 public interface ExecutionStack<T> {
     void push(T statement);
 
@@ -11,4 +13,5 @@ public interface ExecutionStack<T> {
 
     Boolean isEmpty();
 
+    List<T> getContent();
 }

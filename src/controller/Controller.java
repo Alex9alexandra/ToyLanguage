@@ -60,11 +60,11 @@ public class Controller implements IController {
         executor = Executors.newFixedThreadPool(2);
         List<ProgramState> programList = removeCompletedPrograms(repo.getPrgList());
         while (programList.size() > 0) {
-            if(displayFlag==true)
+            if (displayFlag == true)
                 displayCurrentProgramState();
 
             Heap<Value> heap = programList.get(0).heap();
-            Map<Integer,Value> newHeap= unsafeGarbageCollector(
+            Map<Integer, Value> newHeap = unsafeGarbageCollector(
                     programList.stream()
                             .map(prg -> prg.symbolTable().getContent().values())
                             .flatMap(Collection::stream)
@@ -73,13 +73,12 @@ public class Controller implements IController {
             );
             heap.setContent(newHeap);
             programList = removeCompletedPrograms(programList);
-            if(programList.size()==0)
+            if (programList.size() == 0)
                 break;
-            try{
+            try {
                 oneStepForAllPrograms(programList);
-            } catch(Exception e)
-            {
-                System.out.println("Runtime error: "+e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Runtime error: " + e.getMessage());
                 break;
             }
 
@@ -93,7 +92,7 @@ public class Controller implements IController {
     @Override
     public void displayCurrentProgramState() {
         if (displayFlag == true)
-            repo.getPrgList().forEach(prg->System.out.println(prg.toString()));
+            repo.getPrgList().forEach(prg -> System.out.println(prg.toString()));
     }
 
     @Override
@@ -123,12 +122,12 @@ public class Controller implements IController {
 
     @Override
     public List<ProgramState> removeCompletedPrograms(List<ProgramState> inProgramList) {
-        return inProgramList.stream().filter(p->p.isNotCompleted()).collect(Collectors.toList());
+        return inProgramList.stream().filter(p -> p.isNotCompleted()).collect(Collectors.toList());
     }
 
     @Override
     public void oneStepForAllPrograms(List<ProgramState> programList) throws InterruptedException {
-        programList.forEach(prg-> {
+        programList.forEach(prg -> {
 
             try {
                 repo.logProgramStateExecution(prg);
@@ -137,79 +136,75 @@ public class Controller implements IController {
             }
 
         });
-        List<Callable<ProgramState>> callList =programList.stream().map((ProgramState p)->(Callable<ProgramState>)(p::oneStepExecution)).collect(Collectors.toList());
-        List<ProgramState> newProgramList=executor.invokeAll(callList).stream()
-                .map(future->
-                {try {
-                    return future.get();
-                }catch(ExecutionException e){
-                    if(e.getCause() instanceof ProgramStateStackIsEmptyException){
-                        return null;
-                    }
-                    else {
-                        throw new RuntimeException(e.getCause());
-                    }
-                }
-                catch(Exception e){
-                    throw new RuntimeException(e);
-                }
-                })
-                .filter(p->p!=null)
-                .collect(Collectors.toList());
-        programList.addAll(newProgramList);
-        programList.forEach(prg-> {
+        List<Callable<ProgramState>> callList = programList.stream().map((ProgramState p) -> (Callable<ProgramState>) (p::oneStepExecution)).collect(Collectors.toList());
+        List<ProgramState> newProgramList = executor.invokeAll(callList).stream()
+                .map(future ->
+                {
                     try {
-                        repo.logProgramStateExecution(prg);
-                    } catch (IOException e)
-                    {
+                        return future.get();
+                    } catch (ExecutionException e) {
+                        if (e.getCause() instanceof ProgramStateStackIsEmptyException) {
+                            return null;
+                        } else {
+                            throw new RuntimeException(e.getCause());
+                        }
+                    } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
-                });
+                })
+                .filter(p -> p != null)
+                .collect(Collectors.toList());
+        programList.addAll(newProgramList);
+        programList.forEach(prg -> {
+            try {
+                repo.logProgramStateExecution(prg);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         repo.setPrgList(programList);
     }
 
-    public Map<Integer, Value> unsafeGarbageCollector(Collection<Value> symTableValues, Map<Integer,Value> heap) {
+    public Map<Integer, Value> unsafeGarbageCollector(Collection<Value> symTableValues, Map<Integer, Value> heap) {
 
         List<Integer> roots = getAddrFromTable(symTableValues);
-        List<Integer> reacheble= computeReachebleAddresses(roots,heap);
+        List<Integer> reacheble = computeReachebleAddresses(roots, heap);
         return heap.entrySet().stream()
                 .filter(e -> reacheble.contains(e.getKey()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    List<Integer> getAddrFromTable(Collection<Value> symTableValues)
-    {
+    List<Integer> getAddrFromTable(Collection<Value> symTableValues) {
         return symTableValues.stream()
-                .filter(v->v instanceof RefValue)
-                .map(v->((RefValue) v).getAddress())
+                .filter(v -> v instanceof RefValue)
+                .map(v -> ((RefValue) v).getAddress())
                 .collect(Collectors.toList());
     }
 
-    List<Integer> computeReachebleAddresses(List<Integer> startingAddresses,Map<Integer,Value> heap) {
-        List<Integer> reacheble=new java.util.ArrayList<>(startingAddresses);
+    List<Integer> computeReachebleAddresses(List<Integer> startingAddresses, Map<Integer, Value> heap) {
+        List<Integer> reacheble = new java.util.ArrayList<>(startingAddresses);
         boolean changed;
-        do{
-            changed=false;
-            List<Integer> newAddress=heap.entrySet().stream()
-                    .filter(entry->reacheble.contains(entry.getKey()))
+        do {
+            changed = false;
+            List<Integer> newAddress = heap.entrySet().stream()
+                    .filter(entry -> reacheble.contains(entry.getKey()))
                     .map(Map.Entry::getValue)
-                    .filter(v->v instanceof RefValue)
-                    .map(v->((RefValue) v).getAddress())
-                    .filter(addr->!reacheble.contains(addr))
+                    .filter(v -> v instanceof RefValue)
+                    .map(v -> ((RefValue) v).getAddress())
+                    .filter(addr -> !reacheble.contains(addr))
                     .collect(Collectors.toList());
-            if(!newAddress.isEmpty()) {
+            if (!newAddress.isEmpty()) {
                 reacheble.addAll(newAddress);
-                changed=true;
+                changed = true;
             }
 
-        }while(changed);
+        } while (changed);
         return reacheble;
 
     }
 
     @Override
-    public void initializeProgramState(int programIndex)
-    {
+    public void initializeProgramState(int programIndex) {
         Statement stmt = Programs.hardcodedPrograms.get(programIndex);
 
         stmt.typeCheck(new MapSymbolTable<>());
@@ -223,5 +218,23 @@ public class Controller implements IController {
                 stmt
         );
         repo.setPrgList(List.of(programState));
+    }
+
+    @Override
+    public List<ProgramState> getProgramStates() {
+        return repo.getPrgList();
+    }
+
+    @Override
+    public void oneGUIStep() throws Exception {
+        List<ProgramState> prgList =removeCompletedPrograms(repo.getPrgList());
+        if(prgList.isEmpty())
+        {
+            throw new ExecutionCompletedException("Program execution completed.");
+        }
+
+        executor=Executors.newFixedThreadPool(2);
+        oneStepForAllPrograms(prgList);
+        executor.shutdown();
     }
 }

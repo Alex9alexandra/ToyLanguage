@@ -23,4 +23,9 @@ public class ListOut<T> implements Out<T> {
         }
         return sb.toString();
     }
+
+    @Override
+    public List<T> getContent() {
+        return outputList;
+    }
 }
